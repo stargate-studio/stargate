@@ -1,5 +1,5 @@
 
-# Stargate
+# Stargate Network
 IoT Fleet on JS
 
 A tool for easy developing, testing, deploy and controll fleets of remote devices, using JS.
