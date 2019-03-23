@@ -2,6 +2,8 @@
 # Stargate
 IoT Fleet on JS
 
+A tool for easy developing, testing, deploy and controll fleets of remote devices, using JS.
+
 The project is divided in 3 main parts:
 - The web app, codenamed Stargate, that will manage Users, Projects, and interface users with the rest of the system
 - The device management system, condemned Carrier, it provides build, update and communication services for a project.
@@ -10,7 +12,7 @@ The project is divided in 3 main parts:
     - Update service: will provide a HTTPS service to provide update builds for the devices
 - The device firmware called interceptOS, that will contains the base code for OTA updates, communication for the devices (interceptors)
 
-The intention is initially support just ESP32 and ES2019 JS but it could be possible to implement support for other systems and boards.
+The intention is initially support just ESP32 since is the most used IoT platform in the maker communitty and because is already supported in the amazin moddable.js framework.
 
 Usage
 =========
@@ -25,19 +27,25 @@ The user flashes the initial build, that will connect to the carrier, verify its
 
 Stargate
 ----------
-
+Handle user interface, project creation and carrier deployment.
 - Next + GraphCMS[?]
 - Something to handle carrier deploy [aws, googl, do, now]
 
 Carrier
 ----------
-
+The center point of comunication for interceptors running interceptOS.
 - Mosca for MQTT service
-- express for HTTPS service
-- something simple to handle device status and data, redis ?
+- express for HTTPS service (S3?)
+- something simple to handle storage device status, redis ?
 
 InterceptOS
 -----------
-
+The Main module to handle communicatin with the carrier and starting OTA updates when notified by it.
 - Moddable.js
 - ESP-IDF
+
+# References
+
+Balena: https://balena.io
+Mongoose: https://mongoose-os.com
+Thinx: https://thinx.cloud
