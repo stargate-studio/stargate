@@ -1,18 +1,7 @@
-//import { updateAvailable, startUpdateFromUrl } from 'modules/update'
-//import Broker from 'modules/broker'
+import { updateAvailable, startUpdateFromUrl } from 'modules/update'
+import broker from 'modules/broker'
+import Timer from 'timer'
 
-function main() {
-  //if (updateAvailable()) {
-  //  updateRemoteState({ state: 1 })
-  //  updateFromUrl(updateURL)
-  //}
-  trace('start!')
-  try {
-   require('app/main')
-  } catch (error) {
-    trace(error)
-    //updateRemoteState({ state: -1, startError: error })
-  }
-}
+broker.on(`/update`, startUpdateFromUrl)
 
-main()
+Timer.repeat(broker.keepAlive, 12000)
