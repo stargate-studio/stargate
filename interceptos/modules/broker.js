@@ -5,12 +5,11 @@ const client = new Client({host: "broker.hivemq.com", port: 1883, id: "myclient"
 const emitter = EventEmitter()
 
 client.onReady = () => {
+  trace(`brokerup`)
   client.subscribe("/update")
 }
 
-client.onMessage = (t, b) => {
-  emitter.emit(t.split(`/`)[1], b)
-}
+client.onMessage = emitter.emit
 
 client.onClose = () => {
   trace(`brokerdown\n`)
