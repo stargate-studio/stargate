@@ -1,0 +1,10 @@
+version: '3'
+services:
+  builder:
+    image: "stargatestudio/moddable-esp32"
+    ports:
+     - "5000:5000"
+  broker:
+    image: "eclipse-mosquitto"
+  redis:
+    image: "redis:alpine"
