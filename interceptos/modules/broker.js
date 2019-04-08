@@ -1,12 +1,19 @@
 import Client from "mqtt";
-trace('mqtt')
-let client = new Client({host: "broker.hivemq.com", port: 1883, id: "myclient"});
+import EventEmitter from "eventemitter"
+
+const client = new Client({host: "broker.hivemq.com", port: 1883, id: "myclient"});
+const emitter = EventEmitter()
 
 client.onReady = () => {
-    trace('connection up\n'); client.subscribe("/foo")
-    client.publish("/foo", "bar")
+  client.subscribe("/update")
 }
-client.onMessage = (t, b) => { trace(`received message on ${t} with body ${String.fromArrayBuffer(b)}\n`) }
-client.onClose = () => { trace(`server closed connection\n`) }
 
-export default {}
+client.onMessage = (t, b) => {
+  emitter.emit(t.split(`/`)[1], b)
+}
+
+client.onClose = () => {
+  trace(`brokerdown\n`)
+}
+
+export default emitter
